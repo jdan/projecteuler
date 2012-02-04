@@ -1,47 +1,70 @@
-from math import sqrt
+#!/usr/bin/python
 
-_max = 0
-_maxD = 0
-
-def expand(n):
-    frac = []
-    while True:
-        a = int(n)
-        frac.append(a)
-
-        n -= a
-        if n < 0.00001: break
-        n = 1.0/n
-
-        if n == int(n):
-            frac.append(int(n))
-            break
-    return frac
-
-def compress(frac):
-    n = frac[-1]
-    d = 1
-    for i in range(2, len(frac)+1):
-        # XOR swap
-        n = n ^ d
-        d = n ^ d
-        n = n ^ d
-        n += d * frac[-i]
-    return [n, d]
-
-for d in range(2, 1001):
-    if sqrt(d) != int(sqrt(d)):
-        f = expand(sqrt(d))
-        a = 0
-        b = 0
-        for i in range(2, len(f)):
-            q = compress(f[:i])
-            a = q[0]
-            b = q[1]
-            if a**2 - d * (b**2) == 1:
-                if a > _max:
-                    _max = a
-                    _maxD = d
-                break
-        print '%s^2 - %sx%s^2 = 1' % (a, d, b)
-
+def sqrt_cont_frac(n):
+    head = int(n**0.5)
+    if head == n**0.5:
+        return [head]
+    
+    num = head
+    denom = n - head**2
+    
+    a = [head]
+    states = []
+    
+    while 1:
+        pull = (head + num) / denom
+        num -= pull*denom
+        
+        for state in states:
+            if state == [pull, num, denom]:
+                return a
+                
+        states.append([pull, num, denom])
+        a.append(pull)
+        
+        denom = (n - num**2) / denom
+        num *= -1
+        
+def eval_frac(c_frac):
+    c_frac = c_frac[::-1]
+    num = c_frac[0]
+    denom = 1
+    
+    for i in c_frac[1:]:
+        num, denom = denom, num
+        
+        num += i * denom
+        
+    return num, denom
+        
+def pell_equation(d):
+    c_frac = sqrt_cont_frac(d)
+    loop = c_frac[1:]
+    head = c_frac[0]
+    i = 0
+    
+    build = [head]
+    
+    num = head
+    denom = 1
+    
+    while 1:
+        if num**2 - d * denom**2 == 1:
+            return num, denom
+        
+        build.append(loop[i % len(loop)])
+        i += 1
+        
+        num, denom = eval_frac(build)
+            
+if __name__ == '__main__':
+    m = 0
+    m_d = 0
+    for d in range(2, 1001):
+        if int(d**0.5) != d**0.5:
+            p = pell_equation(d)
+            if p[0] > m:
+                m = p[0]
+                m_d = d
+                
+    print 'Max: %s' % m_d
