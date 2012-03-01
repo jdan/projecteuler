@@ -2,26 +2,11 @@
 import urllib
 from math import log
 
-    # The approach
-    # We are given a^b >? x^y
-    #   a^b / x^y > 1
-    #   How can we transform x into a?
-    #
-    # 3^5 = 4^x
-    # x = log 3^5 / log 4
-    # x = 5 log 3 / log 4
-
-    # comp accepts p1, p2
-    #   where each argument [x, y] represents x^y
+# LOGs are your best friend for this problem
 
 def comp(p1, p2):
     # we want to turn p2[0] into p1[0], and modify p2[1]
-    a = p2[1] * log(p2[0]) / log(p1[0])
-    
-    if p1[1] > a:
-        return True
-    else:
-        return False
+    return p1[1] * log(p1[0]) > p2[1] * log(p2[0])
         
 if __name__ == '__main__':
     reader = urllib.urlopen('http://projecteuler.net/project/base_exp.txt')
