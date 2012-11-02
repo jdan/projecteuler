@@ -2,7 +2,7 @@
 ## 12/12/09
 ## What is the total of all the name scores in the file?
 
-reader = file(r'C:\Python\Scripts\Project Euler\names.txt') # open file
+reader = file('names.txt') # open file
 
 total = 0
 
