@@ -2,4 +2,6 @@
 *.pyc
 *.pyo
 *~
-
+*.hi
+*.o
+main
