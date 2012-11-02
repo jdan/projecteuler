@@ -1,3 +1,6 @@
+-- Euler 1 solution by Jordan Scales
+-- 1 November 2012
+
 module Euler1 where
 
 fizzOrBuzz :: Integer -> Bool

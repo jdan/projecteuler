@@ -1,3 +1,6 @@
+-- Euler 2 solution by Jordan Scales
+-- 1 November 2012
+
 module Euler2 where
 
 main :: IO ()
