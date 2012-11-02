@@ -2,7 +2,7 @@
 -- 2 November 2012
 -- pretty slow :(
 
-module Euler7 where
+module Main where
 
 primes :: [Integer]
 primes = sieve [2..]

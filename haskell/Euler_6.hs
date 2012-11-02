@@ -1,7 +1,7 @@
 -- Euler 6 solution by Jordan Scales
 -- 2 November 2012
 
-module Euler6 where
+module Main where
 
 main :: IO ()
 main = do

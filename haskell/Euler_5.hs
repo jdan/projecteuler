@@ -1,7 +1,7 @@
 -- Euler 5 solution by Jordan Scales
 -- 2 November 2012
 
-module Euler5 where
+module Main where
 
 -- divides an integer from a list of integer
 -- adds the leftovers (if there are any) to the end

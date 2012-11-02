@@ -1,7 +1,7 @@
 -- Euler 3 solution by Jordan Scales
 -- 2 November 2012
 
-module Euler3 where
+module Main where
 import Factor
 
 main :: IO ()

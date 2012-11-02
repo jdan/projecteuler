@@ -1,7 +1,7 @@
 -- Euler 1 solution by Jordan Scales
 -- 1 November 2012
 
-module Euler1 where
+module Main where
 
 fizzOrBuzz :: Integer -> Bool
 fizzOrBuzz n = (n `rem` 3 == 0) || (n `rem` 5 == 0)

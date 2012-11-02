@@ -2,7 +2,7 @@
 -- 2 November 2012
 -- kinda slow :(
 
-module Euler4 where
+module Main where
 
 -- digits 1234 -> [1,2,3,4]
 digits :: Integer -> [Integer]
