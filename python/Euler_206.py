@@ -1,17 +1,17 @@
-start = 1000000000
+# Euler 206 Solution
+# Jordan Scales (http://jordanscales.com)
+# 22 Aug 2013
 
-while True:
-    num = str(start**2)
-    lis = [1,2,3,4,5,6,7,8,9,0]
-    c = 0
-    if len(num) > 19:
-        print "Something went wrong!"
-        break
-    for i in range(0,19,2):
-        if num[i] == lis[c]:
-            break
-        else:
-            c+=1
-    start+=10
+from math import sqrt
 
-print "Result: %s" % start
+_min = 10203040506070809
+_max = 19293949596979899
+
+for i in range(int(sqrt(_min)), int(sqrt(_max)) + 1):
+    s = str(i**2)
+    if s[0] == '1' and s[2] == '2' and s[4] == '3' and \
+       s[6] == '4' and s[8] == '5' and s[10] == '6' and \
+       s[12] == '7' and s[14] == '8' and s[16] == '9':
+       print 'Result: %d' % i * 10
+       break
+
