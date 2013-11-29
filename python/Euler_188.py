@@ -5,12 +5,21 @@
 def last8Digits(n):
     return n % 10**8
 
-def tetration(n, k, acc):
-    if k == 0:
-        return acc
+# returns a^b
+def exp_cut(a, b):
+    if b == 0:
+        return 1
     else:
-        print k, acc
-        return tetration(n, k-1, last8Digits(n ** acc))
+        prod = last8Digits(exp_cut(a, b/2) * exp_cut(a, b/2))
+        if b % 2 != 0: prod *= a
+
+        return prod
+
+# returns the last 8 digits of a^^b
+def tetration_cut(a, b):
+
+
 
 if __name__ == '__main__':
-    print 'Result: %d' % tetration(1777, 1855, 1)
+    #print 'Result: %d' % tetration(1777, 1855, 1)
+    print exp_cut(1777, exp_cut(1777, 1777))
