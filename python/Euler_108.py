@@ -1,41 +1,44 @@
-from math import sqrt
+# Euler 108 Solution
+# Jordan Scales <scalesjordan@gmail.com>
+# 10 Mar 2014
 
-def gcd(num1, num2):
-    a = max(num1, num2)
-    b = min(num1, num2)
-    for i in range(1,b+1):
-        if not a % i and not b % i:
-            g = i
-    return g
+memo = {}
+def gcd(a, b):
+    if (a, b) in memo:
+        return memo[(a, b)]
+    elif b == 0:
+        memo[(a, b)] = a
+        return a
+    else:
+        result = gcd(b, a % b)
+        memo[(a, b)] = result
+        return result
 
 def lcm(a, b):
-    return a * b / gcd(a, b)
+    return (a * b) / gcd(a, b)
 
-def factors(n):
-    f = []
-    for i in range(1,int(sqrt(n)) + 1):
-        if not n % i:
-            f.append(i)
-            f.append(n / i)
-    k = list(set(f))
-    k.sort()
-    return k
+# Computes the number of distinct solutions for the equation
+# 1/x + 1/y = 1/n
+def distinctSolutions(n):
+    # x = n+1 and x = 2n offer two solutions right off the bat
+    #
+    # Also, x = 2n is the greatest value of x we need to check before
+    # we repeat
+    solutions = 2
 
-n = 1260
-_max = 1000
+    for x in range(n+2, 2*n):
+        yCandidate = lcm(n, x)
 
-while n < 1261:
-    sol = 0
-    if len(factors(n)) < 1000:
-        for i in factors(n):
-            p = i + n
-            h = lcm(p, n)
-            if 1.0/p + 1.0/h == 1.0/n:
-                sol += 1
-                print '1/%s + 1/%s = 1/%s' % (p, h, n)
-                if sol > _max:
-                    break
-        if sol > _max:
-            print n
-            break
-    n += 1
+        if yCandidate != n * x:
+            denom = (yCandidate / x) + 1
+            if yCandidate % denom == 0 and yCandidate / denom == n:
+                # print "1/%d + 1/%d = 1/%d" % (x, yCandidate, n)
+                solutions += 1
+
+    return solutions
+
+i = 4
+while distinctSolutions(i) <= 40:
+    i += 1
+
+print 'Result: %d' % i
