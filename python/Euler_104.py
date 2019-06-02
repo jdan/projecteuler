@@ -1,22 +1,22 @@
-gold = 1.618033988749895
+# Euler 104
+# 2 Jun 2019
 
-p = 100
+a = 1
+b = 1
+n = 2
+
+def pandigital(n):
+    d = set([])
+    while n > 0:
+        d.add(n % 10)
+        n //= 10
+
+    return d == set([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 while True:
-    num = int((long(gold ** p) - (1 - gold) ** p) / (5 ** 0.5))
-    last = []
-    first = []
-    for char in str(num)[-9:]:
-        last.append(char)
-    for char in str(num)[:9]:
-        first.append(char)
-    last.sort()
-    first.sort()
-    ideal = ['1','2','3','4','5','6','7','8','9']
-    if (p) % 500 == 0:
-        print p
-    if first == ideal:
-        print "Result: %s" % (p)
+    if pandigital(b % 1000000000) and pandigital(int(str(b)[:9])):
+        print n
         break
-    else:
-        p += 1
+
+    a, b = b, a + b
+    n += 1
